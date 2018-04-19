@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="为了测试内存泄漏方便，封装了一个Framework。 相似框架MLeaksFinderPLeakSniffer 使用的时候直接导入Framework就可以，而且只在debug下开启, 真机会报错误，请删处Framework。">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 内存检测">
+<meta property="og:url" content="http://iiooio.com/blog/iOS_内存检测/index.html">
+<meta property="og:site_name" content="iiooio">
+<meta property="og:description" content="为了测试内存泄漏方便，封装了一个Framework。 相似框架MLeaksFinderPLeakSniffer 使用的时候直接导入Framework就可以，而且只在debug下开启, 真机会报错误，请删处Framework。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-18T14:56:42.866Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 内存检测">
+<meta name="twitter:description" content="为了测试内存泄漏方便，封装了一个Framework。 相似框架MLeaksFinderPLeakSniffer 使用的时候直接导入Framework就可以，而且只在debug下开启, 真机会报错误，请删处Framework。">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+          
+        
+    
+    <!-- title -->
+    <title>iOS 内存检测</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/blog/iOS 越狱开发实战1_Characount for Notes/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/blog/Hexo_GithubPages搭建个人博客/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://iiooio.com/blog/iOS_内存检测/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://iiooio.com/blog/iOS_内存检测/&text=iOS 内存检测"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://iiooio.com/blog/iOS_内存检测/&title=iOS 内存检测"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://iiooio.com/blog/iOS_内存检测/&is_video=false&description=iOS 内存检测"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=iOS 内存检测&body=Check out this article: http://iiooio.com/blog/iOS_内存检测/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://iiooio.com/blog/iOS_内存检测/&title=iOS 内存检测"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://iiooio.com/blog/iOS_内存检测/&title=iOS 内存检测"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://iiooio.com/blog/iOS_内存检测/&title=iOS 内存检测"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://iiooio.com/blog/iOS_内存检测/&title=iOS 内存检测"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://iiooio.com/blog/iOS_内存检测/&name=iOS 内存检测&description=&lt;p&gt;为了测试内存泄漏方便，封装了一个Framework。&lt;/p&gt;
+&lt;p&gt;相似框架&lt;br&gt;&lt;a href=&#34;https://wereadteam.github.io/2016/02/22/MLeaksFinder/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MLeaksFinder&lt;/a&gt;&lt;br&gt;&lt;a href=&#34;http://mrpeak.cn/blog/leak/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PLeakSniffer&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用的时候直接导入Framework就可以，而且只在debug下开启, 真机会报错误，请删处Framework。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        iOS 内存检测
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">iiooio</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-12-01T07:40:56.000Z" itemprop="datePublished">2016-12-01</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/iOS/">iOS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>为了测试内存泄漏方便，封装了一个Framework。</p>
+<p>相似框架<br><a href="https://wereadteam.github.io/2016/02/22/MLeaksFinder/" target="_blank" rel="noopener">MLeaksFinder</a><br><a href="http://mrpeak.cn/blog/leak/" target="_blank" rel="noopener">PLeakSniffer</a></p>
+<p>使用的时候直接导入Framework就可以，而且只在debug下开启, 真机会报错误，请删处Framework。<br><a id="more"></a></p>
+<p>###内存泄漏注意事项</p>
+<p>1.Block里面<code>self</code>强引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">_headerView.followClickBlock = ^() &#123;</span><br><span class="line">  if (![self isLogin]) &#123;</span><br><span class="line">      [[MRouter sharedRouter] handleURL:[NSURL URLWithString:@&quot;https://passport.wallstreetcn.com/login&quot;] userInfo:nil];</span><br><span class="line">      return;</span><br><span class="line">  &#125;</span><br><span class="line">  [weakSelf dealFollowClick];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>block 里面的self用<code>wself</code>替换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) wself = self;</span><br></pre></td></tr></table></figure>
+<p>2.自定义代理时强引用delegate 会造成内存泄漏；</p>
+<p>如果父VC持有子VC，并设置子VC的delegate为self（也就是父VC），这样的结果就是子VC也间接持有了父VC，造成循环引用，在Pop子VC的时候不会调用delloc.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, strong) id&lt;ProfileEditPickerViewDelegate&gt; delegate;</span><br></pre></td></tr></table></figure>
+<p>把<code>strong</code>修饰符改为<code>weak</code> 不用<code>assign</code></p>
+<p>3.OC和CF转化出现的内存警告用完添加<code>CFRelease()</code>释放对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CFStringRef cfString = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)picDataString,NULL,CFSTR(&quot;:/?#[]@!$&amp;’()*+,;=&quot;),kCFStringEncodingUTF8);</span><br><span class="line">NSString *baseString = [NSString stringWithString:(NSString *)cfString];</span><br><span class="line">CFRelease(cfString); //不添加会泄漏</span><br></pre></td></tr></table></figure>
+<p>4.CATransition 动画<code>removedOnCompletion</code>属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CATransition *animation = [CATransition animation];</span><br><span class="line">animation.delegate = self;</span><br><span class="line">animation.duration = 0.3f;</span><br><span class="line">animation.timingFunction = UIViewAnimationCurveEaseInOut;</span><br><span class="line">animation.fillMode = kCAFillModeForwards;</span><br><span class="line">animation.type = kCATransitionPush;</span><br><span class="line">animation.subtype = kCATransitionFromLeft;</span><br><span class="line">animation.startProgress = 0.0;</span><br><span class="line">animation.endProgress = 1.0;</span><br><span class="line">animation.removedOnCompletion = NO; //有内存泄漏的风险</span><br><span class="line">[self.layer addAnimation:animation forKey:@&quot;animation&quot;];</span><br><span class="line">[self.textField resignFirstResponder];</span><br></pre></td></tr></table></figure>
+<p>5.NSTimer<br>NSTimer会造成循环引用，timer会强引用target即self，在加入runloop的操作中，又引用了timer，所以在timer被invalidate之前，self也就不会被释放。<br>所以我们要注意，不仅仅是把timer当作实例变量的时候会造成循环引用，只要申请了timer，加入了runloop，并且target是self，虽然不是循环引用，但是self却没有释放的时机。如下方式申请的定时器，self已经无法释放了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSTimer *timer = [NSTimer timerWithTimeInterval:5 target:self selector:@selector(commentAnimation) userInfo:nil repeats:YES];</span><br><span class="line">[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];</span><br></pre></td></tr></table></figure>
+<p>解决这种问题有几个实现方式，大家可以根据具体场景去选择：</p>
+<p>增加startTimer和stopTimer方法，在合适的时机去调用，比如可以在viewDidDisappear时stopTimer，或者由这个类的调用者去设置。<br>每次任务结束时使用dispatch_after方法做延时操作。注意使用weakself，否则也会强引用self。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (void)startAnimation &#123;</span><br><span class="line">	__weak typeof(self) wself = self;</span><br><span class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        [weakSelf commentAnimation];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用GCD的定时器，同样注意使用weakself。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) wself = self;</span><br><span class="line">timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());</span><br><span class="line">dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC, 1 * NSEC_PER_SEC);</span><br><span class="line">dispatch_source_set_event_handler(timer, ^&#123;</span><br><span class="line">    [weakSelf commentAnimation];</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_resume(timer);</span><br></pre></td></tr></table></figure>
+<p>6.NSNotification<br>使用block的方式增加notification，引用了self，在删除notification之前，self不会被释放，与timer的场景类似，其实这段代码已经声明了weakself，但是调用_eventManger方法还是引起了循环引用。<br>也就是说，即使我们没有调用self方法，_xxx也会造成循环引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[[NSNotificationCenter defaultCenter] addObserverForName:kUserSubscribeNotification object:nil queue:nil usingBlock:^(NSNotification *note) &#123;</span><br><span class="line">    if (note) &#123;</span><br><span class="line">        Model *model=(Model *)note.object;</span><br><span class="line">        if ([model.subId integerValue] == [weakSelf.subId integerValue]) &#123;</span><br><span class="line">            [_eventManger playerSubsciption:NO];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>7.有一些图片很大用<code>[UIImage imageNamed:@&quot;&quot;]</code>加载的话回常驻内存，建议大的图片加载从本地文件加载<code>[UIImage imageWithContentsOfFile:@&quot;&quot;]</code></p>
+<p>8.performSelector延时调用导致的内存泄露</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self performSelector:@selector(method1:) withObject:self.tableLayer afterDelay:3];</span><br></pre></td></tr></table></figure>
+<p>有时切换场景时延时函数已经被调用但还没有执行，这时tableLayer的引用计数没有减少到0，也就导致了切换场景dealloc方法没有被调用，出现了内存泄露。所以解决办法就是取消那些还没有来得及执行的延时函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[NSObject cancelPreviousPerformRequestsWithTarget:self]</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://iiooio.com/blog/iOS_内存检测/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://iiooio.com/blog/iOS_内存检测/&text=iOS 内存检测"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://iiooio.com/blog/iOS_内存检测/&title=iOS 内存检测"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://iiooio.com/blog/iOS_内存检测/&is_video=false&description=iOS 内存检测"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=iOS 内存检测&body=Check out this article: http://iiooio.com/blog/iOS_内存检测/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://iiooio.com/blog/iOS_内存检测/&title=iOS 内存检测"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://iiooio.com/blog/iOS_内存检测/&title=iOS 内存检测"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://iiooio.com/blog/iOS_内存检测/&title=iOS 内存检测"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://iiooio.com/blog/iOS_内存检测/&title=iOS 内存检测"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://iiooio.com/blog/iOS_内存检测/&name=iOS 内存检测&description=&lt;p&gt;为了测试内存泄漏方便，封装了一个Framework。&lt;/p&gt;
+&lt;p&gt;相似框架&lt;br&gt;&lt;a href=&#34;https://wereadteam.github.io/2016/02/22/MLeaksFinder/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MLeaksFinder&lt;/a&gt;&lt;br&gt;&lt;a href=&#34;http://mrpeak.cn/blog/leak/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PLeakSniffer&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;使用的时候直接导入Framework就可以，而且只在debug下开启, 真机会报错误，请删处Framework。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 iiooio
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67266460-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'iiooio';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

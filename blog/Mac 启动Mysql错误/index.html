@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Mac_启动Mysql错误①　Check if mysql is properly installed and also set up. 1brew info mysql If it’s not installed then google for how to install ‘mysql through homebrew’. If it is installed do not forget to">
+<meta name="keywords" content="Mac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac_启动Mysql错误">
+<meta property="og:url" content="http://iiooio.com/blog/Mac 启动Mysql错误/index.html">
+<meta property="og:site_name" content="iiooio">
+<meta property="og:description" content="Mac_启动Mysql错误①　Check if mysql is properly installed and also set up. 1brew info mysql If it’s not installed then google for how to install ‘mysql through homebrew’. If it is installed do not forget to">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-18T12:32:00.008Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac_启动Mysql错误">
+<meta name="twitter:description" content="Mac_启动Mysql错误①　Check if mysql is properly installed and also set up. 1brew info mysql If it’s not installed then google for how to install ‘mysql through homebrew’. If it is installed do not forget to">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Mac_启动Mysql错误</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/blog/Mac Python环境搭建/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/blog/iOS_LLDB调试/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://iiooio.com/blog/Mac 启动Mysql错误/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://iiooio.com/blog/Mac 启动Mysql错误/&text=Mac_启动Mysql错误"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://iiooio.com/blog/Mac 启动Mysql错误/&title=Mac_启动Mysql错误"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://iiooio.com/blog/Mac 启动Mysql错误/&is_video=false&description=Mac_启动Mysql错误"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Mac_启动Mysql错误&body=Check out this article: http://iiooio.com/blog/Mac 启动Mysql错误/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://iiooio.com/blog/Mac 启动Mysql错误/&title=Mac_启动Mysql错误"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://iiooio.com/blog/Mac 启动Mysql错误/&title=Mac_启动Mysql错误"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://iiooio.com/blog/Mac 启动Mysql错误/&title=Mac_启动Mysql错误"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://iiooio.com/blog/Mac 启动Mysql错误/&title=Mac_启动Mysql错误"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://iiooio.com/blog/Mac 启动Mysql错误/&name=Mac_启动Mysql错误&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mac-启动Mysql错误"><span class="toc-number">1.</span> <span class="toc-text">Mac_启动Mysql错误</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Mac_启动Mysql错误
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">iiooio</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2015-09-28T00:21:34.000Z" itemprop="datePublished">2015-09-28</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Mac/">Mac</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Mac-启动Mysql错误"><a href="#Mac-启动Mysql错误" class="headerlink" title="Mac_启动Mysql错误"></a>Mac_启动Mysql错误</h1><p>①　Check if mysql is properly installed and also set up.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew info mysql</span><br></pre></td></tr></table></figure>
+<p>If it’s not installed then google for how to install ‘mysql through homebrew’. If it is installed do not forget to set up your mysql by doing what homebrew tells you:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">We&apos;ve installed your MySQL database without a root password. To secure it run:</span><br><span class="line">    mysql_secure_installation</span><br><span class="line"></span><br><span class="line">To connect run:</span><br><span class="line">    mysql -uroot</span><br><span class="line"></span><br><span class="line">To have launchd start mysql now and restart at login:</span><br><span class="line">  brew services start mysql</span><br><span class="line">Or, if you don&apos;t want/need a background service you can just run:</span><br><span class="line">  mysql.server start</span><br></pre></td></tr></table></figure>
+<p>In your terminal do everything above. If you got errors, first check if your mysql server is running:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql.server start</span><br></pre></td></tr></table></figure></p>
+<p>Then try mysql_secure_installation and/or mysql -uroot to try and get in.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 2002 (HY000): Can&apos;t connect to local MySQL server through socket &apos;/tmp/mysql.sock&apos; (2)</span><br></pre></td></tr></table></figure>
+<p>In case of this error try: <code>mysql -uroot -h 127.0.0.1</code> I don’t know why but it selects the wrong host by default.</p>
+<p>If this still doesn’t work maybe you already set a password, in that case you need to add -p to the command: <code>mysql -uroot -h 127.0.0.1 -p</code></p>
+<p>If even this fails maybe it’s a permission problem. Try:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R _mysql:mysql /usr/local/var/mysql</span><br><span class="line">sudo mysql.server start</span><br></pre></td></tr></table></figure>
+<p>If you got in properly: That’s great! Let’s create our first Database.</p>
+<p>②　Creating the database you’ll work with.</p>
+<p>So if you didn’t use Laravel Homestead you’ll have to create your database first. Once you got into your mysql through the commands above it should say: mysql&gt; in the terminal now.</p>
+<p>Then just write: <code>CREATE DATABASE my_db</code>; where you can write any name instead of my_db. That’s it!</p>
+<p>③　Setting up your Laravel settings.</p>
+<p>In your Laravel project folder there will be a .env file. Open that and look inside, and search for the following part:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DB_CONNECTION=mysql</span><br><span class="line">DB_HOST=127.0.0.1</span><br><span class="line">DB_PORT=3306</span><br><span class="line">DB_DATABASE=homestead</span><br><span class="line">DB_USERNAME=homestead</span><br><span class="line">DB_PASSWORD=secret</span><br></pre></td></tr></table></figure>
+<p>Even though I didn’t install Laravel through homestead, it has all the ‘homestead’ settings… Here’s what you need to change:</p>
+<ul>
+<li>Check if the DB_HOST is set to <code>127.0.0.1</code></li>
+<li>Set the <code>DB_DATABASE</code> to the one you created. In this case <code>my_db</code></li>
+<li>Set a preferred <code>DB_USERNAME</code> or try root.</li>
+<li>Set the <code>DB_PASSWORD</code> to the password for MySQL you choose at the very beginning, when you set up your mysql through homebrew.</li>
+</ul>
+<p>④　DONE</p>
+<p>You’re done. Try opening the terminal again, go to your Laravel project folder and <code>php artisan migrate</code>.</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mac-启动Mysql错误"><span class="toc-number">1.</span> <span class="toc-text">Mac_启动Mysql错误</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://iiooio.com/blog/Mac 启动Mysql错误/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://iiooio.com/blog/Mac 启动Mysql错误/&text=Mac_启动Mysql错误"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://iiooio.com/blog/Mac 启动Mysql错误/&title=Mac_启动Mysql错误"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://iiooio.com/blog/Mac 启动Mysql错误/&is_video=false&description=Mac_启动Mysql错误"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Mac_启动Mysql错误&body=Check out this article: http://iiooio.com/blog/Mac 启动Mysql错误/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://iiooio.com/blog/Mac 启动Mysql错误/&title=Mac_启动Mysql错误"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://iiooio.com/blog/Mac 启动Mysql错误/&title=Mac_启动Mysql错误"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://iiooio.com/blog/Mac 启动Mysql错误/&title=Mac_启动Mysql错误"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://iiooio.com/blog/Mac 启动Mysql错误/&title=Mac_启动Mysql错误"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://iiooio.com/blog/Mac 启动Mysql错误/&name=Mac_启动Mysql错误&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 iiooio
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67266460-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'iiooio';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

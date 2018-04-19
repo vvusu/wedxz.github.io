@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="CentOS7 Firewalld安装： 1# yum install firewalld` 图形界面： 1# yum install firewall-config` 介绍防火墙守护 firewalld 服务引入了一个信任级别的概念来管理与之相关联的连接与接口。它支持 ipv4 与 ipv6，并支持网桥，采用 firewall-cmd (command) 或 firewall-config (g">
+<meta name="keywords" content="CentOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS7 Firewalld">
+<meta property="og:url" content="http://iiooio.com/blog/CentOS7_Firewalld/index.html">
+<meta property="og:site_name" content="iiooio">
+<meta property="og:description" content="CentOS7 Firewalld安装： 1# yum install firewalld` 图形界面： 1# yum install firewall-config` 介绍防火墙守护 firewalld 服务引入了一个信任级别的概念来管理与之相关联的连接与接口。它支持 ipv4 与 ipv6，并支持网桥，采用 firewall-cmd (command) 或 firewall-config (g">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-18T13:00:23.660Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS7 Firewalld">
+<meta name="twitter:description" content="CentOS7 Firewalld安装： 1# yum install firewalld` 图形界面： 1# yum install firewall-config` 介绍防火墙守护 firewalld 服务引入了一个信任级别的概念来管理与之相关联的连接与接口。它支持 ipv4 与 ipv6，并支持网桥，采用 firewall-cmd (command) 或 firewall-config (g">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+          
+        
+    
+    <!-- title -->
+    <title>CentOS7 Firewalld</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/blog/CentOS7_搭建IPSec-L2TP/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/blog/Mac Python环境搭建/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://iiooio.com/blog/CentOS7_Firewalld/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://iiooio.com/blog/CentOS7_Firewalld/&text=CentOS7 Firewalld"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://iiooio.com/blog/CentOS7_Firewalld/&title=CentOS7 Firewalld"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://iiooio.com/blog/CentOS7_Firewalld/&is_video=false&description=CentOS7 Firewalld"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CentOS7 Firewalld&body=Check out this article: http://iiooio.com/blog/CentOS7_Firewalld/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://iiooio.com/blog/CentOS7_Firewalld/&title=CentOS7 Firewalld"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://iiooio.com/blog/CentOS7_Firewalld/&title=CentOS7 Firewalld"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://iiooio.com/blog/CentOS7_Firewalld/&title=CentOS7 Firewalld"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://iiooio.com/blog/CentOS7_Firewalld/&title=CentOS7 Firewalld"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://iiooio.com/blog/CentOS7_Firewalld/&name=CentOS7 Firewalld&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS7-Firewalld"><span class="toc-number">1.</span> <span class="toc-text">CentOS7 Firewalld</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CentOS7 Firewalld
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">iiooio</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2015-10-31T09:22:37.000Z" itemprop="datePublished">2015-10-31</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/CentOS/">CentOS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="CentOS7-Firewalld"><a href="#CentOS7-Firewalld" class="headerlink" title="CentOS7 Firewalld"></a>CentOS7 Firewalld</h1><p>安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum install firewalld`</span><br></pre></td></tr></table></figure>
+<p>图形界面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum install firewall-config`</span><br></pre></td></tr></table></figure>
+<p>介绍<br>防火墙守护 firewalld 服务引入了一个信任级别的概念来管理与之相关联的连接与接口。它支持 ipv4 与 ipv6，并支持网桥，采用 firewall-cmd (command) 或 firewall-config (gui) 来动态的管理 kernel netfilter 的临时或永久的接口规则，并实时生效而无需重启服务。 </p>
+<p>zone<br> Firewall 能将不同的网络连接归类到不同的信任级别，Zone 提供了以下几个级别</p>
+<ul>
+<li>drop: 丢弃所有进入的包，而不给出任何响应</li>
+<li>block: 拒绝所有外部发起的连接，允许内部发起的连接</li>
+<li>public: 允许指定的进入连接</li>
+<li>external: 同上，对伪装的进入连接，一般用于路由转发</li>
+<li>dmz: 允许受限制的进入连接</li>
+<li>work: 允许受信任的计算机被限制的进入连接，类似 workgroup</li>
+<li>home: 同上，类似 homegroup</li>
+<li>internal: 同上，范围针对所有互联网用户</li>
+<li>trusted: 信任所有连接</li>
+</ul>
+<p>过滤规则</p>
+<ul>
+<li>source: 根据源地址过滤</li>
+<li>interface: 根据网卡过滤</li>
+<li>service: 根据服务名过滤</li>
+<li>port: 根据端口过滤</li>
+<li>icmp-block: icmp 报文过滤，按照 icmp 类型配置</li>
+<li>masquerade: ip 地址伪装</li>
+<li>forward-port: 端口转发</li>
+<li>rule: 自定义规则</li>
+</ul>
+<p>其中，过滤规则的优先级遵循如下顺序</p>
+<ol>
+<li>source</li>
+<li>interface</li>
+<li>firewalld.conf</li>
+</ol>
+<p>其中，过滤规则的优先级遵循如下顺序</p>
+<ol>
+<li>source</li>
+<li>interface</li>
+<li>firewalld.conf</li>
+</ol>
+<p>二、使用方法</p>
+<pre><code># systemctl unmask firewalld      #解除锁定
+# systemctl start firewalld       # 启动 
+# systemctl enable firewalld      # 开机启动 
+# systemctl stop firewalld        # 关闭 
+# systemctl disable firewalld     # 取消开机启动 
+</code></pre><p>具体的规则管理，可以使用 <code>firewall-cmd</code>，具体的使用方法可以</p>
+<pre><code>$ firewall-cmd --help
+--zone=NAME                         # 指定 zone
+--permanent                         # 永久修改，--reload 后生效
+--timeout=seconds                   # 持续效果，到期后自动移除，用于调试，不能与 --permanent 同时使用
+</code></pre><ol>
+<li>查看规则<br>查看运行状态</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --state</span><br></pre></td></tr></table></figure>
+<p>查看已被激活的 Zone 信息</p>
+<pre><code>$ firewall-cmd --get-active-zones
+public
+  interfaces: eth0 eth1
+</code></pre><p>查看指定接口的 Zone 信息</p>
+<pre><code>$ firewall-cmd --get-zone-of-interface=eth0
+public
+</code></pre><p>查看指定级别的接口</p>
+<pre><code>$ firewall-cmd --zone=public --list-interfaces
+eth0
+</code></pre><p>查看指定级别的所有信息，譬如 public</p>
+<pre><code>$ firewall-cmd --zone=public --list-all
+public (default, active)
+  interfaces: eth0
+  sources:
+  services: dhcpv6-client http ssh
+  ports:
+  masquerade: no
+  forward-ports:
+  icmp-blocks:
+  rich rules:
+</code></pre><p>查看所有级别被允许的信息</p>
+<pre><code>$ firewall-cmd --get-service
+</code></pre><p>查看重启后所有 Zones 级别中被允许的服务，即永久放行的服务</p>
+<pre><code>$ firewall-cmd --get-service --permanent
+</code></pre><ol start="2">
+<li>管理规则</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># firewall-cmd --panic-on           # 丢弃</span><br><span class="line"># firewall-cmd --panic-off          # 取消丢弃</span><br><span class="line"># firewall-cmd --query-panic        # 查看丢弃状态</span><br><span class="line"># firewall-cmd --reload             # 更新规则，不重启服务</span><br><span class="line"># firewall-cmd --complete-reload    # 更新规则，重启服务</span><br><span class="line">#firewall-cmd --reload              # 效果同上</span><br></pre></td></tr></table></figure>
+<p>添加某接口至某信任等级，譬如添加 eth0 至 public，永久修改</p>
+<pre><code># firewall-cmd --zone=public --add-interface=eth0 --permanent
+</code></pre><p>设置 public 为默认的信任级别</p>
+<pre><code># firewall-cmd --set-default-zone=public
+</code></pre><p>A. 管理端口<br>列出 dmz 级别的被允许的进入端口</p>
+<pre><code># firewall-cmd --zone=dmz --list-ports
+</code></pre><p>允许 tcp 端口 8080 至 dmz 级别</p>
+<pre><code># firewall-cmd --zone=dmz --add-port=8080/tcp
+</code></pre><p>允许某范围的 udp 端口至 public 级别，并永久生效</p>
+<pre><code># firewall-cmd --zone=public --add-port=10000-20000/tcp --permanent
+</code></pre><p>B. 网卡接口<br>列出 public zone 所有网卡</p>
+<pre><code># firewall-cmd --zone=public --list-interfaces
+</code></pre><p>将 eth0 添加至 public zone，永久</p>
+<pre><code># firewall-cmd --zone=public --permanent --add-interface=eth0
+</code></pre><p>eth0 存在与 public zone，将该网卡添加至 work zone，并将之从 public zone 中删除</p>
+<pre><code># firewall-cmd --zone=work --permanent --change-interface=eth0
+</code></pre><p>删除 public zone 中的 eth0，永久</p>
+<pre><code># firewall-cmd --zone=public --permanent --remove-interface=eth0
+</code></pre><p>C. 管理服务<br>添加 smtp 服务至 work zone</p>
+<pre><code># firewall-cmd --zone=work --add-service=smtp
+</code></pre><p>移除 work zone 中的 smtp 服务</p>
+<pre><code># firewall-cmd --zone=work --remove-service=smtp
+</code></pre><p>D. 配置 external zone 中的 ip 地址伪装<br>查看</p>
+<pre><code># firewall-cmd --zone=external --query-masquerade
+</code></pre><p>打开伪装</p>
+<pre><code># firewall-cmd --zone=external --add-masquerade
+</code></pre><p>关闭伪装</p>
+<pre><code># firewall-cmd --zone=external --remove-masquerade
+</code></pre><p>E. 配置 public zone 的端口转发<br>要打开端口转发，则需要先</p>
+<pre><code># firewall-cmd --zone=public --add-masquerade
+</code></pre><p>然后转发 tcp 22 端口至 3753</p>
+<pre><code># firewall-cmd --zone=public --add-forward-port=port=22:proto=tcp:toport=3753
+</code></pre><p>转发 22 端口数据至另一个 ip 的相同端口上</p>
+<pre><code># firewall-cmd --zone=public --add-forward-port=port=22:proto=tcp:toaddr=192.168.1.100
+</code></pre><p>转发 22 端口数据至另一 ip 的 2055 端口上</p>
+<pre><code># firewall-cmd --zone=public --add-forward-port=port=22:proto=tcp:toport=2055:toaddr=192.168.1.100
+</code></pre><p>F. 配置 public zone 的 icmp<br>查看所有支持的 icmp 类型</p>
+<pre><code># firewall-cmd --get-icmptypes
+destination-unreachable echo-reply echo-request parameter-problem redirect router-advertisement router-solicitation source-quench time-exceeded
+</code></pre><p>列出</p>
+<pre><code># firewall-cmd --zone=public --list-icmp-blocks
+</code></pre><p>添加 echo-request 屏蔽</p>
+<pre><code># firewall-cmd --zone=public --add-icmp-block=echo-request [--timeout=seconds]
+</code></pre><p>移除 echo-reply 屏蔽</p>
+<pre><code># firewall-cmd --zone=public --remove-icmp-block=echo-reply
+</code></pre><p>G. IP 封禁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#仅允许部分IP访问本机服务配置</span><br><span class="line">#firewall-cmd --permanent --zone=public --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.0.4/24&quot; service name=&quot;http&quot; accept&quot;</span><br><span class="line">        </span><br><span class="line">#不允许部分IP访问本机服务配置     </span><br><span class="line"># firewall-cmd --permanent --add-rich-rule=&quot;rule family=&apos;ipv4&apos; source address=&apos;222.222.222.222&apos; reject&quot;</span><br><span class="line"></span><br><span class="line">#仅允许部分IP访问本机端口配置</span><br><span class="line">firewall-cmd --permanent --zone=public --add-rich-rule=&quot;rule family=&quot;ipv4&quot; source address=&quot;192.168.0.4/24&quot; port protocol=&quot;tcp&quot; port=&quot;8080&quot; accept&quot;</span><br><span class="line">```  </span><br><span class="line">H. 其他操作</span><br><span class="line">	</span><br><span class="line">检查ftp服务的21端口是否开放</span><br></pre></td></tr></table></figure>
+<p>iptables -L -n | grep 21<br>ACCEPT     tcp  –  0.0.0.0/0            0.0.0.0/0            tcp dpt:21 ctstate<br>NEW<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查询ftp服务启用状态</span><br></pre></td></tr></table></figure></p>
+<p>firewall-cmd –query-service ftp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看当前规则</span><br></pre></td></tr></table></figure></p>
+<p>firewall-cmd –list-all<br><code>`</code></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS7-Firewalld"><span class="toc-number">1.</span> <span class="toc-text">CentOS7 Firewalld</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://iiooio.com/blog/CentOS7_Firewalld/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://iiooio.com/blog/CentOS7_Firewalld/&text=CentOS7 Firewalld"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://iiooio.com/blog/CentOS7_Firewalld/&title=CentOS7 Firewalld"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://iiooio.com/blog/CentOS7_Firewalld/&is_video=false&description=CentOS7 Firewalld"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CentOS7 Firewalld&body=Check out this article: http://iiooio.com/blog/CentOS7_Firewalld/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://iiooio.com/blog/CentOS7_Firewalld/&title=CentOS7 Firewalld"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://iiooio.com/blog/CentOS7_Firewalld/&title=CentOS7 Firewalld"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://iiooio.com/blog/CentOS7_Firewalld/&title=CentOS7 Firewalld"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://iiooio.com/blog/CentOS7_Firewalld/&title=CentOS7 Firewalld"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://iiooio.com/blog/CentOS7_Firewalld/&name=CentOS7 Firewalld&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 iiooio
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67266460-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'iiooio';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="#CentOS7_搭建Ghost博客 初始化VPS刚刚创建CentOS7的时候建议安装yum源。然后再往下继续执行要不有些软件找不到。这里参考 如何添加yum源 先安装依赖文件 123yum update //更新yum源yum groupinstall &amp;quot;Development Tools&amp;quot; //安装开发工具组包yum install wget 配置 MySQL安装mysql">
+<meta name="keywords" content="CentOS7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos7_SS-Panel">
+<meta property="og:url" content="http://iiooio.com/blog/CentOS7_搭建Ghost博客/index.html">
+<meta property="og:site_name" content="iiooio">
+<meta property="og:description" content="#CentOS7_搭建Ghost博客 初始化VPS刚刚创建CentOS7的时候建议安装yum源。然后再往下继续执行要不有些软件找不到。这里参考 如何添加yum源 先安装依赖文件 123yum update //更新yum源yum groupinstall &amp;quot;Development Tools&amp;quot; //安装开发工具组包yum install wget 配置 MySQL安装mysql">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-18T12:32:00.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centos7_SS-Panel">
+<meta name="twitter:description" content="#CentOS7_搭建Ghost博客 初始化VPS刚刚创建CentOS7的时候建议安装yum源。然后再往下继续执行要不有些软件找不到。这里参考 如何添加yum源 先安装依赖文件 123yum update //更新yum源yum groupinstall &amp;quot;Development Tools&amp;quot; //安装开发工具组包yum install wget 配置 MySQL安装mysql">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Centos7_SS-Panel</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/blog/Linux_配置PPTP/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/blog/CentOS7_添加yum源/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://iiooio.com/blog/CentOS7_搭建Ghost博客/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&text=Centos7_SS-Panel"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&title=Centos7_SS-Panel"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&is_video=false&description=Centos7_SS-Panel"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Centos7_SS-Panel&body=Check out this article: http://iiooio.com/blog/CentOS7_搭建Ghost博客/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&title=Centos7_SS-Panel"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&title=Centos7_SS-Panel"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&title=Centos7_SS-Panel"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&title=Centos7_SS-Panel"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&name=Centos7_SS-Panel&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化VPS"><span class="toc-number">1.</span> <span class="toc-text">初始化VPS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置-MySQL"><span class="toc-number">2.</span> <span class="toc-text">配置 MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#如何备份数据库？"><span class="toc-number">2.0.1.</span> <span class="toc-text">如何备份数据库？</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Centos7_SS-Panel
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">iiooio</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2014-12-24T07:20:37.000Z" itemprop="datePublished">2014-12-24</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/CentOS7/">CentOS7</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>#CentOS7_搭建Ghost博客</p>
+<h4 id="初始化VPS"><a href="#初始化VPS" class="headerlink" title="初始化VPS"></a>初始化VPS</h4><p>刚刚创建CentOS7的时候建议安装yum源。然后再往下继续执行要不有些软件找不到。这里参考 <a href="http://vvusu.com/centos7tian-jia-chang-yong-yumyuan" target="_blank" rel="noopener"><strong>如何添加yum源</strong></a></p>
+<p>先安装依赖文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum update //更新yum源</span><br><span class="line">yum groupinstall &quot;Development Tools&quot; //安装开发工具组包</span><br><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
+<h4 id="配置-MySQL"><a href="#配置-MySQL" class="headerlink" title="配置 MySQL"></a>配置 MySQL</h4><p>安装mysql 软件</p>
+<pre><code>yum install mysql-community-client
+
+安装成功后启动mysql
+
+systemctl start mysql
+
+###### 配置mysql
+
+sudo mysql_secure_installation  
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">    //输入安装MySQL时的密码，此时为空，直接回车</span><br><span class="line">    Enter current password for root (enter for none): </span><br><span class="line"></span><br><span class="line">    OK, successfully used password, moving on...</span><br><span class="line"></span><br><span class="line">    Set root password? [Y/n]        //设置root密码 </span><br><span class="line"></span><br><span class="line">    New password: </span><br><span class="line"></span><br><span class="line">    Re-enter new password: </span><br><span class="line"></span><br><span class="line">    Password updated successfully! </span><br><span class="line"></span><br><span class="line">    Reloading privilege tables.. </span><br><span class="line"></span><br><span class="line">     ... Success!</span><br><span class="line"></span><br><span class="line">    Remove anonymous users? [Y/n]    //删除匿名用户 </span><br><span class="line"></span><br><span class="line">     ... Success!</span><br><span class="line"></span><br><span class="line">    Disallow root login remotely? [Y/n]    //禁止root用户远程登录 </span><br><span class="line"></span><br><span class="line">     ... Success!</span><br><span class="line"></span><br><span class="line">    Remove test database and access to it? [Y/n] //删除默认的 test 数据库， </span><br><span class="line"></span><br><span class="line">     - Dropping test database...</span><br><span class="line">     ... Success!</span><br><span class="line">     - Removing privileges on test database...</span><br><span class="line">     ... Success!</span><br><span class="line"></span><br><span class="line">    Reload privilege tables now? [Y/n]    //是否马上应用最新的设置 </span><br><span class="line"></span><br><span class="line">     ... Success!</span><br><span class="line"></span><br><span class="line">    Cleaning up...</span><br><span class="line"></span><br><span class="line">    All done!  If you&apos;ve completed all of the above steps, your MySQL </span><br><span class="line"></span><br><span class="line">    installation should now be secure.</span><br><span class="line"></span><br><span class="line">    Thanks for using MySQL! </span><br><span class="line">    ``` </span><br><span class="line">    运行上述命令可以进入 MySQL 的交互式安装程序，基本流程是：</span><br><span class="line"></span><br><span class="line">    1.输入安装 MySQL 时指定的 root 密码，一般直接按回车</span><br><span class="line">    2.是否改变 root 密码，输入 y</span><br><span class="line">    3.输入新的 root 密码</span><br><span class="line">    4.是否删除匿名用户，输入 y</span><br><span class="line">    5.是否禁止 root 远程登录，输入 y</span><br><span class="line">    6.是否删除默认的 test 数据库，输入 y</span><br><span class="line">    7.是否马上应用最新的设置，输入 y</span><br><span class="line">    至此，MySQL安装成功。</span><br><span class="line"></span><br><span class="line">###### 设置字符编码为UTF-8  编辑MySQL的配置文件</span><br><span class="line"></span><br><span class="line">    vi /etc/my.cnf</span><br></pre></td></tr></table></figure>
+
+[client]
+default-character-set=utf8
+[mysql]
+default-character-set=utf8
+[mysqld]
+character-set-server=utf8
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查看是否成功</span><br></pre></td></tr></table></figure>
+<pre><code>mysql&gt;;show variables like &apos;char%&apos;;(输入)
+mysql&gt;;show variables like &apos;collation%&apos;;(输出)
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">###### 登录MySQL 创建数据库，并添加权限</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;`mysql -uroot -p (你的密码)</span><br><span class="line">`&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+<pre><code># 创建名为ghost的用户并新建名为ghost的数据库，同时给ghost用户授予ghost数据库的所有权限
+
+CREATE DATABASE ghost; 
+
+GRANT ALL PRIVILEGES ON ghost.* To &apos;ghost&apos;@&apos;127.0.0.1&apos; IDENTIFIED BY &apos;为ghost用户设置一个与root不同的密码&apos;; 
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">#### 编译安装Node.js</span><br><span class="line"></span><br><span class="line">方法一： 下载源代码后执行编译和安装。缺点：编译程序往往要消耗很多时间。</span><br><span class="line">从官方仓库获得最新的 Node.js 源代码包：</span><br><span class="line">wget http://nodejs.org/dist/node-latest.tar.gz</span><br><span class="line">tar -xzf node-latest.tar.gz</span><br><span class="line">cd node-v*</span><br><span class="line">编译和安装 Node.js：</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br><span class="line">完成后我们可以通过 node -v 和 npm -v 命令来检查 Node.js 的版本。</span><br><span class="line"></span><br><span class="line">方法二：从网络仓库下载已经编译完成的安装包。</span><br><span class="line"></span><br><span class="line">首先添加仓库：</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;`curl -sL https://rpm.nodesource.com/setup | bash -</span><br><span class="line">`&lt;/pre&gt;</span><br><span class="line"></span><br><span class="line">直接下载安装 Nodejs：</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;`yum install -y nodejs</span><br><span class="line">`&lt;/pre&gt;</span><br><span class="line"></span><br><span class="line">分别用 node -v 和 npm -v 检查 Node.js 的版本。(两种方法的最终效果都一样)</span><br><span class="line"></span><br><span class="line">#### 编译安装Nginx</span><br><span class="line"></span><br><span class="line">添加Nginx 的源后安装 Nginx</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;`yum install nginx</span><br><span class="line">`&lt;/pre&gt;</span><br><span class="line"></span><br><span class="line">运行nginx</span><br><span class="line">`</span><br><span class="line">systemctl start nginx</span><br><span class="line">`</span><br><span class="line">首先我们安装Nginx启动HTTP服务器,安装成功后输入你的网站IP就可以看到“Welcome to Nginx!”。</span><br><span class="line"></span><br><span class="line">###### 配置 Nginx 的反向代理</span><br><span class="line"></span><br><span class="line">前面，如果你已经安装好了 Nginx。修改Nginx代理配置文件,并将代理指向到本地的Ghost端口:</span><br><span class="line"></span><br><span class="line">sudo vi /etc/nginx/conf.d/default.conf</span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name vvusu.com *.vvusu.com;(填写博客地址)</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header   X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header   Host      $http_host;</span><br><span class="line">        proxy_pass         http://127.0.0.1:2368;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">重新启动 Nginx 服务器,让设置生效。</span><br><span class="line"></span><br><span class="line">systemctl restart nginx</span><br><span class="line"></span><br><span class="line">PS: 关键的工作都已做完了！ 你的博客程序能够跟随操作系统自动运行了。</span><br><span class="line">但是别忘了修改服务器时区哦。错误的系统时间会导致博客程序显示错误的文章发布日期。</span><br></pre></td></tr></table></figure>
+
+sudo yun install -y ntp
+sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+Enjoy!
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">下面是一些常用的 nginx 相关文件地址：</span><br><span class="line"></span><br><span class="line">1.主配置文件：/etc/nginx/nginx.conf</span><br><span class="line">2.默认主机配置文件：/etc/nginx/conf.d/default.conf</span><br><span class="line">3.默认日志目录：/var/log/nginx/</span><br><span class="line"></span><br><span class="line">#### 安装Ghost</span><br><span class="line"></span><br><span class="line">创建一个文件夹，用来放置网站文件和 Ghost 博客程序。</span><br><span class="line"></span><br><span class="line">cd /srv/www/</span><br><span class="line"></span><br><span class="line">从官方网站下载最新版本的 Ghost（ghost-latest.zip）：</span><br><span class="line"></span><br><span class="line">wget https://ghost.org/zip/ghost-latest.zip</span><br><span class="line">unzip -d ghost ghost-latest.zip  //解压</span><br><span class="line"></span><br><span class="line">进入 Ghost 安装目录：</span><br><span class="line"></span><br><span class="line">cd /srv/www/ghost</span><br><span class="line"></span><br><span class="line">接下来，进入存放 Ghost 系统的目录并安装 Ghost 所依赖的 npm 包：</span><br><span class="line"></span><br><span class="line">sudo npm install --production</span><br><span class="line"></span><br><span class="line">安装完成后用 npm start 命令启动开发者模式下的 Ghost，用于检查有没有安装成功。 成功了，Ghost会运行在本地局域网内 127.0.0.1:2368。如果是在电脑上安装的，用浏览器访问此地址即可预览 Ghost。</span><br><span class="line"></span><br><span class="line">##### 编辑ghost的配置文件</span><br><span class="line"></span><br><span class="line">我们进入 Ghost 系统目录，为 Ghost 增加配置文件并配置数据库：</span><br></pre></td></tr></table></figure>
+
+cd /srv/www/ghost
+sudo cp config.example.js config.js 
+
+sudo vi config.js
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最后一条指令是用 vim 打开 config.js 文件进行编辑。我们只修改 production 一节的配置信息，修改为如下形式（注意按照你自己的实际情况替换！）：</span><br></pre></td></tr></table></figure>
+
+# wget https://ghost.org/zip/ghost-latest.zip
+
+# unzip ghost-latest.zip -d ghost
+
+# npm install --production
+
+# mysql -uroot -p -e &apos;create database ghost;&apos; //Ghost默认的是SQLite数据库，但是在各大云平台上都不是太好，这里更换为MariaDB数据库。这里新建一个名为“ghost”的数据库。
+
+# cp config.example.js config.js //备份配置文件
+
+# vi config.js //修改config.js类似于这样
+
+production: { 
+
+    url: &apos;http://vvusu.com&apos;, //你的blog地址
+    mail: {},
+    database: {
+        client: &apos;mysql&apos;,
+        connection: {
+            host     : &apos;127.0.0.1&apos;, 
+            user     : &apos;ghost&apos;, //用ghost账户
+            password : &apos;password&apos;, //你的ghost账户密码
+            database : &apos;ghost&apos;,
+            charset  : &apos;utf8&apos;
+    },
+        debug: false
+    },
+
+&lt;pre&gt;`server: {
+    // Host to be passed to node&apos;s `net.Server#listen()`
+    host: &apos;127.0.0.1&apos;,
+    // Port to be passed to node&apos;s `net.Server#listen()`, for iisnode set this to `process.env.PORT`
+    port: &apos;2368&apos;
+}
+`&lt;/pre&gt;
+
+},
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 删除sqlite</span><br><span class="line"></span><br><span class="line">打开 Ghost 系统的目录下面的 package.json 文件，将 &quot;sqlite3&quot;: &quot;2.2.0&quot;, 这一行删除掉（注意，你看到的 sqlite 版本可能会不一样，但是，只要是 sqlite3 字样，删除即可）。</span><br><span class="line"></span><br><span class="line">#### 以生产模式运行 Ghost</span><br><span class="line"></span><br><span class="line">###### 第一种方式</span><br><span class="line"></span><br><span class="line">但是要部署，我们不能让其运行在开发模式。需要让其运行在生产模式，且当其运行进程退出时自动重启。因此我们可以使用强大的进程守护程序“pm2”达到此目的。（也可以使用Forever）</span><br><span class="line"></span><br><span class="line">进入到刚才的Ghost安装目录，执行下面的命令安装PM2：</span><br><span class="line"></span><br><span class="line">sudo npm install pm2 -g</span><br><span class="line"></span><br><span class="line">我们要设置环境变量为“production”生产模式！“index.js”是程序启动的入口。最后给这个pm2的进程命名为\&quot;ghost\&quot; 于是，执行下面的命令：</span><br><span class="line"></span><br><span class="line">NODE_ENV=production pm2 start index.js --name &quot;ghost&quot;</span><br><span class="line"></span><br><span class="line">让PM2知道在开机后自动运行我们的网站：</span><br><span class="line"></span><br><span class="line">pm2 startup centos</span><br><span class="line"></span><br><span class="line">pm2 save</span><br><span class="line"></span><br><span class="line">提示: pm2 kill ghost （清除所有ghost进程）</span><br><span class="line"></span><br><span class="line">pm2 &amp;lt;start|stop|restart&gt;; ghost （启动|停止|重启ghost进程）</span><br><span class="line">pm2 startup &amp;lt;centos|ubuntu|amazon&gt;; （让pm2能够在这3个系统上自动启动）</span><br><span class="line"></span><br><span class="line">至此，pm2 已经可以守护 Ghost 博客永远在线。</span><br><span class="line"></span><br><span class="line">###### 第二种方式</span><br><span class="line"></span><br><span class="line">配置**systemd**</span><br><span class="line"></span><br><span class="line">当我们断开ssh的时候，Node.js的进程也会死掉，所以我们要让Ghost自动重启，官方推荐用forever，如果你想用可以去看看。在这里我们用CentOs 7新的配置工具systemd来守护Ghost，让她死掉后能自动重启。关于systemd请自行Google</span><br></pre></td></tr></table></figure>
+
+# vi /etc/systemd/system/ghost.service
+
+//添加如下内容
+[Service]
+WorkingDirectory=你的Ghost博客目录
+ExecStart=/opt/node-v0.10.30/bin/node index.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=ghostblog
+User=你想运行ghost的用户
+Group=组
+Environment=PATH=/opt/node-v0.10.30/bin:$PATH
+Environment=&apos;NODE_ENV=production&apos;
+
+[Install]
+WantedBy=multi-user.target
+让Ghost自启动
+
+# systemctl enable ghost
+
+# systemctl start ghost
+
+# systemctl status ghost
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    ###### 第三种方式</span><br><span class="line"></span><br><span class="line">    安装forever</span><br><span class="line"></span><br><span class="line">    sudo npm install forever -g  </span><br><span class="line"></span><br><span class="line">    运行ghost</span><br><span class="line"></span><br><span class="line">    cd /srv/www/ghost  </span><br><span class="line">    sudo NODE_ENV=production forever start index.js  </span><br><span class="line"></span><br><span class="line">##### 遇到的问题</span><br><span class="line"></span><br><span class="line">###### 主页显示很慢,界面很久才展示出来.</span><br></pre></td></tr></table></figure>
+</code></pre><p>还是因为google被墙了，需要删除三处引用了谷歌字体的地方。/core/server/views 下的两个default.hbs 和 user-error.hbs 以及主题目录content/themes/你的主题/default.hbs中的:</p>
+<link rel="\"stylesheet\"" type="\"text/css\"" href="\"//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400\""> 
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">###### npm start ghost 正常运行以后，访问ghost， 无法进入后台，web端显示的状态码为302.</span><br><span class="line"></span><br><span class="line">进入ghost 后台系统会自动检测更新，是否有新版本,但是国内无法访问这个地址 update.ghost.org. </span><br><span class="line">所以你应该在config.js中加入updateCheck: false, 看起来像这样：</span><br></pre></td></tr></table></figure>
+<p>development: { </p>
+<pre><code>updateCheck: false,
+ database: {
+     client: &apos;mysql&apos;,
+     connection: {
+         host     : &apos;127.0.0.1&apos;,
+         ......
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">###### 如何备份现有的文件？</span><br></pre></td></tr></table></figure>
+<p>cp /srv/www/ghost /srv/www/ghost_bak<br><code>`</code></p>
+<p>这样就可以把原来的文件备份到ghost_bak文件夹.</p>
+<h6 id="如何备份数据库？"><a href="#如何备份数据库？" class="headerlink" title="如何备份数据库？"></a>如何备份数据库？</h6><p>先按cd /srv 进入/srv目录,再mysqldump -uroot -p你的密码 ghost &gt;; ghost.sql<br>这样就会把你的数据库内容备份到srv目录的ghost.sql这个文件里.</p>
+<p>参考文献:<a href="http://kittenyang.com/myfirstblog/" target="_blank" rel="noopener">http://kittenyang.com/myfirstblog/</a><br><a href="http://undefinedblog.com/centos-installing-ghost/" target="_blank" rel="noopener">http://undefinedblog.com/centos-installing-ghost/</a></p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化VPS"><span class="toc-number">1.</span> <span class="toc-text">初始化VPS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置-MySQL"><span class="toc-number">2.</span> <span class="toc-text">配置 MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#如何备份数据库？"><span class="toc-number">2.0.1.</span> <span class="toc-text">如何备份数据库？</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://iiooio.com/blog/CentOS7_搭建Ghost博客/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&text=Centos7_SS-Panel"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&title=Centos7_SS-Panel"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&is_video=false&description=Centos7_SS-Panel"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Centos7_SS-Panel&body=Check out this article: http://iiooio.com/blog/CentOS7_搭建Ghost博客/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&title=Centos7_SS-Panel"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&title=Centos7_SS-Panel"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&title=Centos7_SS-Panel"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&title=Centos7_SS-Panel"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://iiooio.com/blog/CentOS7_搭建Ghost博客/&name=Centos7_SS-Panel&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 iiooio
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67266460-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'iiooio';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+

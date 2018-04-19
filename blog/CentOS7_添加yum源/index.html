@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="#CentOS7_添加yum源 CentOS 的官方源去掉了一些与版权有关的软件,因此想要安装这些软件或者手动下载安装,或者使用其他源. 首先, 添加源之前要确定系统架构及版本.查看系统版本: CentOS 系统使用以下命令: rpm -q centos-release  会得到如下显示:  centos-release-7-1.1503.el7.centos.2.8.x86_64  之后, 要确">
+<meta name="keywords" content="CentOS7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS7_添加yum源">
+<meta property="og:url" content="http://iiooio.com/blog/CentOS7_添加yum源/index.html">
+<meta property="og:site_name" content="iiooio">
+<meta property="og:description" content="#CentOS7_添加yum源 CentOS 的官方源去掉了一些与版权有关的软件,因此想要安装这些软件或者手动下载安装,或者使用其他源. 首先, 添加源之前要确定系统架构及版本.查看系统版本: CentOS 系统使用以下命令: rpm -q centos-release  会得到如下显示:  centos-release-7-1.1503.el7.centos.2.8.x86_64  之后, 要确">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-18T12:32:00.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS7_添加yum源">
+<meta name="twitter:description" content="#CentOS7_添加yum源 CentOS 的官方源去掉了一些与版权有关的软件,因此想要安装这些软件或者手动下载安装,或者使用其他源. 首先, 添加源之前要确定系统架构及版本.查看系统版本: CentOS 系统使用以下命令: rpm -q centos-release  会得到如下显示:  centos-release-7-1.1503.el7.centos.2.8.x86_64  之后, 要确">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+          
+        
+    
+    <!-- title -->
+    <title>CentOS7_添加yum源</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/blog/CentOS7_搭建Ghost博客/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://iiooio.com/blog/CentOS7_添加yum源/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://iiooio.com/blog/CentOS7_添加yum源/&text=CentOS7_添加yum源"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://iiooio.com/blog/CentOS7_添加yum源/&title=CentOS7_添加yum源"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://iiooio.com/blog/CentOS7_添加yum源/&is_video=false&description=CentOS7_添加yum源"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CentOS7_添加yum源&body=Check out this article: http://iiooio.com/blog/CentOS7_添加yum源/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://iiooio.com/blog/CentOS7_添加yum源/&title=CentOS7_添加yum源"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://iiooio.com/blog/CentOS7_添加yum源/&title=CentOS7_添加yum源"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://iiooio.com/blog/CentOS7_添加yum源/&title=CentOS7_添加yum源"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://iiooio.com/blog/CentOS7_添加yum源/&title=CentOS7_添加yum源"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://iiooio.com/blog/CentOS7_添加yum源/&name=CentOS7_添加yum源&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-Remi-源"><span class="toc-number">1.</span> <span class="toc-text">添加 Remi 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-RPMforge-源"><span class="toc-number">2.</span> <span class="toc-text">添加 RPMforge 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-RPMFusion源"><span class="toc-number">3.</span> <span class="toc-text">添加 RPMFusion源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-EPEL-源"><span class="toc-number">4.</span> <span class="toc-text">添加 EPEL 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-php-源"><span class="toc-number">5.</span> <span class="toc-text">添加 php 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-Mysql-源"><span class="toc-number">6.</span> <span class="toc-text">添加 Mysql 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-Nginx-源"><span class="toc-number">7.</span> <span class="toc-text">添加 Nginx 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加国内的源"><span class="toc-number">8.</span> <span class="toc-text">添加国内的源</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#中科大镜像源"><span class="toc-number">8.1.</span> <span class="toc-text">中科大镜像源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#浙大源"><span class="toc-number">8.2.</span> <span class="toc-text">浙大源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#上海交大源"><span class="toc-number">8.3.</span> <span class="toc-text">上海交大源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#sohu镜像源，更新比较慢"><span class="toc-number">8.4.</span> <span class="toc-text">sohu镜像源，更新比较慢</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CentOS7_添加yum源
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">iiooio</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2014-10-09T05:20:07.000Z" itemprop="datePublished">2014-10-09</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/CentOS7/">CentOS7</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>#CentOS7_添加yum源</p>
+<p>CentOS 的官方源去掉了一些与版权有关的软件,因此想要安装这些软件或者手动下载安装,或者使用其他源.</p>
+<p>首先, 添加源之前要确定系统架构及版本.<br>查看系统版本:</p>
+<p>CentOS 系统使用以下命令:</p>
+<pre><code>rpm -q centos-release
+
+会得到如下显示:
+
+centos-release-7-1.1503.el7.centos.2.8.x86_64
+
+之后, 要确定系统架构.
+
+uname -a
+
+会得到如下显示:
+
+Linux li1079-11.members.linode.com 4.1.5-x86_64-linode61 #7 SMP Mon Aug 24 13:46:31 EDT 2015 x86_64 x86_64 x86_64 GNU/Linux
+
+x86_64 就是此系统的架构.
+
+知道了系统版本与架构,就可以在源中找到对应的文件导入.
+
+这里介绍几个源: **Remi**, **RPMforge** , **EPEL**, **webtatic** , **Nginx** 
+如果你是使用的国内主机建议添加国内源如:**网易**,**搜狐**,**中科大**,**中移动**等等.
+</code></pre><h4 id="添加-Remi-源"><a href="#添加-Remi-源" class="headerlink" title="添加 Remi 源"></a>添加 Remi 源</h4><pre><code>rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+
+Remi 源包含了众多软件, 它的更新速度很快. 很多新版本的软件都能第一时间在这里找到.进入 [Remi 官网](http://http://rpms.remirepo.net), 找到 Maintained Enterprise Linux (RHEL / CentOS / Other clones) 项,根据系统架构选择相应 release 文件
+</code></pre><h4 id="添加-RPMforge-源"><a href="#添加-RPMforge-源" class="headerlink" title="添加 RPMforge 源"></a>添加 RPMforge 源</h4><pre><code>&lt;pre&gt;rpm -ivh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
+&lt;/pre&gt;
+
+首先到 [RPMforge 网站](http://repoforge.org)找到**usage** 下载对应版本，本地添加。
+</code></pre><h4 id="添加-RPMFusion源"><a href="#添加-RPMFusion源" class="headerlink" title="添加 RPMFusion源"></a>添加 RPMFusion源</h4><pre><code>[RPMFusion源](http://rpmfusion.org/Configuration)找到对应的版本下载源
+
+rpm - ivh http://download1.rpmfusion.org/free/el/updates/6/i386/rpmfusion-free-release-6-1.noarch.rpm
+</code></pre><h4 id="添加-EPEL-源"><a href="#添加-EPEL-源" class="headerlink" title="添加 EPEL 源"></a>添加 EPEL 源</h4><pre><code>rpm -ivh http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+进入网站往下拉, 找到 How can I use these extra packages? 项, 根据系统架构与版本选 EL7, 点击, 系统会根据来访ip查找最快的源镜像, 国内访问通常会转到搜狐与中科大的源.如果想用美国源, 就要使用代理访问.
+</code></pre><h4 id="添加-php-源"><a href="#添加-php-源" class="headerlink" title="添加 php 源"></a>添加 php 源</h4><pre><code>进入[webtatic.com](http://webtatic.com) ,找到 CentOS/RHEL 7 源并添加.
+
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+</code></pre><h4 id="添加-Mysql-源"><a href="#添加-Mysql-源" class="headerlink" title="添加 Mysql 源"></a>添加 Mysql 源</h4><pre><code>rpm -ivh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm&lt;/pre&gt;
+</code></pre><h4 id="添加-Nginx-源"><a href="#添加-Nginx-源" class="headerlink" title="添加 Nginx 源"></a>添加 Nginx 源</h4><p><code>vi /etc/yum.repos.d/nginx.repo</code></p>
+<pre><code>进入 Nginx 官网 , 点右侧的 download 链接, 拉到最下面找到 Pre-Built Packages 项. 点 mainline version 版本的链接. 根据提示编辑 repo 文件的内容, 具体操作如下. 在 yum repo 目录创建新的 nginx.repo 文件输入以下内容
+[nginx]
+name=nginx repo 
+baseurl=http://nginx.org/packages/mainline/centos/7/$basearch/ 
+gpgcheck=0 
+enabled=1
+</code></pre><h4 id="添加国内的源"><a href="#添加国内的源" class="headerlink" title="添加国内的源"></a>添加国内的源</h4><h5 id="中科大镜像源"><a href="#中科大镜像源" class="headerlink" title="中科大镜像源"></a>中科大镜像源</h5><p>rpm -Uvh <a href="http://mirrors.ustc.edu.cn/centos/7.0.1406/extras/x86_64/Packages/epel-release-7-5.noarch.rpm" target="_blank" rel="noopener">http://mirrors.ustc.edu.cn/centos/7.0.1406/extras/x86_64/Packages/epel-release-7-5.noarch.rpm</a></p>
+<h5 id="浙大源"><a href="#浙大源" class="headerlink" title="浙大源"></a>浙大源</h5><pre><code>rpm -Uvh http://mirrors.zju.edu.cn/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+</code></pre><h5 id="上海交大源"><a href="#上海交大源" class="headerlink" title="上海交大源"></a>上海交大源</h5><pre><code>rpm -Uvh http://ftp.sjtu.edu.cn/fedora/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+</code></pre><h5 id="sohu镜像源，更新比较慢"><a href="#sohu镜像源，更新比较慢" class="headerlink" title="sohu镜像源，更新比较慢"></a>sohu镜像源，更新比较慢</h5><pre><code>rpm -Uvh http://mirrors.sohu.com/fedora-epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+保存退出
+
+&lt;pre&gt;yum clean all&lt;/pre&gt;
+
+添加源之后更新 yum
+
+&lt;pre&gt;yum update&lt;/pre&gt;
+
+最后,需要设置源的管理策略
+如果你喜欢优先从某个源安装软件,那么建议安装 yum-priorities 插件
+这个插件的作用是给多个源排定优先顺序, 当多个源中存在同一软件的时候, 软件会从优先级最高的源这装.
+
+&lt;pre&gt;yum install yum-priorities
+</code></pre><p>安装完后需要设置/etc/yum.repos.d/ 目录下的.repo相关文件（如CentOS-Base.repo），在这些文件中插入顺序指令：priority=N （N为1到99的正整数，数值越小越优先）,例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[base]</span><br><span class="line">name=CentOS-$releasever – Base </span><br><span class="line">mirrorlist=http://mirrorlist.CentOS.org/?release=$releasever&amp;amp;arch=$basearch&amp;amp;repo=os </span><br><span class="line"></span><br><span class="line"># baseurl=http://mirror.CentOS.org/CentOS/$releasever/os/$basearch/</span><br><span class="line"></span><br><span class="line">gpgcheck=1 </span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5 </span><br><span class="line">priority=1</span><br><span class="line"></span><br><span class="line"># released updates</span><br><span class="line"></span><br><span class="line">[updates]</span><br><span class="line">name=CentOS-$releasever – Updates </span><br><span class="line">mirrorlist=http://mirrorlist.CentOS.org/?release=$releasever&amp;amp;arch=$basearch&amp;amp;repo=updates </span><br><span class="line"></span><br><span class="line"># baseurl=http://mirror.CentOS.org/CentOS/$releasever/updates/$basearch/</span><br><span class="line"></span><br><span class="line">gpgcheck=1 </span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-5 </span><br><span class="line">priority=1</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-Remi-源"><span class="toc-number">1.</span> <span class="toc-text">添加 Remi 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-RPMforge-源"><span class="toc-number">2.</span> <span class="toc-text">添加 RPMforge 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-RPMFusion源"><span class="toc-number">3.</span> <span class="toc-text">添加 RPMFusion源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-EPEL-源"><span class="toc-number">4.</span> <span class="toc-text">添加 EPEL 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-php-源"><span class="toc-number">5.</span> <span class="toc-text">添加 php 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-Mysql-源"><span class="toc-number">6.</span> <span class="toc-text">添加 Mysql 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加-Nginx-源"><span class="toc-number">7.</span> <span class="toc-text">添加 Nginx 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加国内的源"><span class="toc-number">8.</span> <span class="toc-text">添加国内的源</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#中科大镜像源"><span class="toc-number">8.1.</span> <span class="toc-text">中科大镜像源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#浙大源"><span class="toc-number">8.2.</span> <span class="toc-text">浙大源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#上海交大源"><span class="toc-number">8.3.</span> <span class="toc-text">上海交大源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#sohu镜像源，更新比较慢"><span class="toc-number">8.4.</span> <span class="toc-text">sohu镜像源，更新比较慢</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://iiooio.com/blog/CentOS7_添加yum源/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://iiooio.com/blog/CentOS7_添加yum源/&text=CentOS7_添加yum源"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://iiooio.com/blog/CentOS7_添加yum源/&title=CentOS7_添加yum源"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://iiooio.com/blog/CentOS7_添加yum源/&is_video=false&description=CentOS7_添加yum源"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CentOS7_添加yum源&body=Check out this article: http://iiooio.com/blog/CentOS7_添加yum源/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://iiooio.com/blog/CentOS7_添加yum源/&title=CentOS7_添加yum源"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://iiooio.com/blog/CentOS7_添加yum源/&title=CentOS7_添加yum源"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://iiooio.com/blog/CentOS7_添加yum源/&title=CentOS7_添加yum源"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://iiooio.com/blog/CentOS7_添加yum源/&title=CentOS7_添加yum源"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://iiooio.com/blog/CentOS7_添加yum源/&name=CentOS7_添加yum源&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 iiooio
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/wedxz">Projects</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67266460-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'iiooio';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
