@@ -129,17 +129,17 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Ghost_开源主题]]></title>
-    <url>%2Fblog%2FGhost_%E5%BC%80%E6%BA%90%E4%B8%BB%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[#Ghost_开源主题 ####Yasukohttps://github.com/foru17/Yasuko ####uno-zenhttps://github.com/Kikobeats/uno-zen ####ghost-themeshttps://github.com/haydenbleasel/ghost-themes ####ghostwriterhttps://github.com/roryg/ghostwriter ####ghostiumhttps://github.com/oswaldoacauan/ghostium ####Mapachehttps://github.com/godofredoninja/Mapache ####Vaporhttps://github.com/sethlilly/Vapor]]></content>
+    <title><![CDATA[Ghost_添加代码高亮]]></title>
+    <url>%2Fblog%2FGhost_%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%2F</url>
+    <content type="text"><![CDATA[#Ghost_添加代码高亮 首先做个展示，如下是一段 C# 代码： 123using System;namespace Testhighlight &#123;&#125; 那么，怎么为自己使用的 Ghost 主题添加代码高亮呢？打开 Highlightjs.org 选择你想要安装代码高亮的语言，然后点击 Download。 将下载的 “highlight.zip” 解包并且上传到你的 Ghost 主题文件夹，比如我的是 /ghost/content/themes/casper/assets 打开你喜欢的编辑器，编辑你主题的 “default.hbs” ，在 &lt;head&gt;&lt;/head&gt; 标签之间添加: 123&lt;link rel="stylesheet" href="/assets/css/highlight/monokai_sublime.css" /&gt; &lt;!-- 这里指定的 css 文件是代码高亮的主题，可以根据你的喜好自由选择--&gt; &lt;script src="/assets/js/highlight.pack.js"&gt;&lt;/script&gt; &lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt; 最后：保存你的 “default.hbs” 文件并且上传到服务器，重启你的 Ghost 博客，大功告成。]]></content>
       <tags>
         <tag>Ghost</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Ghost_添加代码高亮]]></title>
-    <url>%2Fblog%2FGhost_%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%2F</url>
-    <content type="text"><![CDATA[#Ghost_添加代码高亮 首先做个展示，如下是一段 C# 代码： 123using System;namespace Testhighlight &#123;&#125; 那么，怎么为自己使用的 Ghost 主题添加代码高亮呢？打开 Highlightjs.org 选择你想要安装代码高亮的语言，然后点击 Download。 将下载的 “highlight.zip” 解包并且上传到你的 Ghost 主题文件夹，比如我的是 /ghost/content/themes/casper/assets 打开你喜欢的编辑器，编辑你主题的 “default.hbs” ，在 &lt;head&gt;&lt;/head&gt; 标签之间添加: 123&lt;link rel="stylesheet" href="/assets/css/highlight/monokai_sublime.css" /&gt; &lt;!-- 这里指定的 css 文件是代码高亮的主题，可以根据你的喜好自由选择--&gt; &lt;script src="/assets/js/highlight.pack.js"&gt;&lt;/script&gt; &lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt; 最后：保存你的 “default.hbs” 文件并且上传到服务器，重启你的 Ghost 博客，大功告成。]]></content>
+    <title><![CDATA[Ghost_开源主题]]></title>
+    <url>%2Fblog%2FGhost_%E5%BC%80%E6%BA%90%E4%B8%BB%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[#Ghost_开源主题 ####Yasukohttps://github.com/foru17/Yasuko ####uno-zenhttps://github.com/Kikobeats/uno-zen ####ghost-themeshttps://github.com/haydenbleasel/ghost-themes ####ghostwriterhttps://github.com/roryg/ghostwriter ####ghostiumhttps://github.com/oswaldoacauan/ghostium ####Mapachehttps://github.com/godofredoninja/Mapache ####Vaporhttps://github.com/sethlilly/Vapor]]></content>
       <tags>
         <tag>Ghost</tag>
       </tags>
